@@ -1,0 +1,61 @@
+.row {
+  max-width: $grid-width; // будет ширина только если ее достаточно, если нет то заполнить 100% ширины
+  margin: 0 auto; // ставим в центр блоч элемент внутри другого блочного элемента
+  
+  /*&:last-child {  выбирает последнй элемент
+    margin-bottom: 0;
+  }*/
+  &:not(:last-child) {   //выбирает все кроме last-child
+    margin-bottom: $gutter-vertical;
+    @include respond(tab-port) { 
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+  @include respond(tab-port) { 
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+
+  @include clearfix;
+
+  [class^="col-"] {
+    float: left;
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+      @include respond(tab-port) { 
+        margin-right: 0;
+        margin-bottom: $gutter-vertical-small;
+      }
+    }
+    @include respond(tab-port) { 
+      width: 100% !important;
+    }
+  }
+  // [class^="col-"] ^ это выбирет все элеметы начинающиеся с класса col-
+  // Если указать [class*="col-"]  то выбирет все элементы содержащие col-
+  // Если указать [class$="col-"] то выбирает все элементы заканчивающиеся на col-
+  .col-1-of-2 {
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+  .col-1-of-3 {
+    width: calc((100% - #{$gutter-horizontal * 2}) / 3);
+    
+  }
+  .col-2-of-3 {
+    width: calc(2 * ((100% - #{$gutter-horizontal * 2}) / 3) + #{$gutter-horizontal});
+    
+  }
+  .col-1-of-4 {
+    width: calc((100% - #{$gutter-horizontal * 3}) / 4);
+    
+  }
+  .col-2-of-4 {
+    width: calc(2 * ((100% - #{$gutter-horizontal * 3}) / 4) + #{$gutter-horizontal});
+    
+  }
+  .col-3-of-4 {
+    width: calc(3 * ((100% - #{$gutter-horizontal * 3}) / 4) + 2 * #{$gutter-horizontal});
+    
+  }
+}
+
